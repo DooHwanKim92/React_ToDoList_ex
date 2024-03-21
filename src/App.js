@@ -1,32 +1,40 @@
-import logo from './logo.svg';
 import './App.css';
-import { useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 
 function App() {
 
+  let textId = useRef(4);
 
   const [toDoList, setToDoList] = useState([
-    {text:"toDo-1"},
-    {text:"toDo-2"},
-    {text:"toDo-3"}
+    {id:1,text:"toDo-1"},
+    {id:2,text:"toDo-2"},
+    {id:3,text:"toDo-3"}
   ]);
-
 
   const onInsert = (e) => {
     e.preventDefault();
-    setToDoList([...toDoList, {text: e.target.text.value}])
+    setToDoList([...toDoList, {id:textId.current,text: e.target.text.value}]);
+    textId.current++;
   }
 
-
+  const onRemove = (id) => {
+      setToDoList(toDoList.filter((toDoList => toDoList.id !== id)))
+    }
 
   return (
     <div className="App">
-      <nav><h1>ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</h1></nav>
+      <nav><h1>React ToDoList</h1></nav>
       <form onSubmit={onInsert}>
         <input name="text" /><button type='submit'>enter</button>
       </form>
       <ul>
-        {toDoList.map(toDoList => <li><input type='checkbox'/>{toDoList.text}<button>delete</button></li>)}
+        {toDoList.map(toDoList => 
+          <li>
+            <input type='checkbox'/> {toDoList.id}/{toDoList.text}
+            <button>modify</button>
+            <button onClick={() => onRemove(toDoList.id)}>delete</button>
+          </li>)
+          }
       </ul>
     </div>
   );
