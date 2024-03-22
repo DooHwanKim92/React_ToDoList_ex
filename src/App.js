@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Header from './components/Header';
 import Insert from './components/Insert';
 import Items from './components/Items';
@@ -6,18 +6,22 @@ import Items from './components/Items';
 
 function App() {
 
-  const textId = useRef(4);
-
+  const textId = useRef(31);
 
   const [toDoList, setToDoList] = useState([
-    {id:1, text:"ToDo-1", checked:false},
-    {id:2, text:"ToDo-2", checked:false},
-    {id:3, text:"ToDo-3", checked:false}
+
   ]);
+
+  useEffect(() => {
+    const data = fetch('https://dummyjson.com/todos')
+    .then(res => res.json())
+    .then(data => setToDoList(data.todos))
+    .then(console.log);
+  }, [])
 
   const onInsert = (e) => {
     e.preventDefault();
-    setToDoList([...toDoList, {id:textId.current, text: e.target.text.value, checked:false}]);
+    setToDoList([...toDoList, {id:textId.current, todo: e.target.text.value, checked:false}]);
     textId.current++;
   }
 
@@ -31,13 +35,11 @@ function App() {
     }))
   }
 
-  const onModify = (id) => {
+  const onModify = (e,id) => {
     setToDoList(toDoList.map((toDoList) => {
-      return toDoList.id === id ? {...toDoList, text: id.target.modifyText.value} : toDoList
+      return toDoList.id === id ? {...toDoList, text: e.target.modifyText.value} : toDoList
     }))
   }
-
-
 
 
   return (

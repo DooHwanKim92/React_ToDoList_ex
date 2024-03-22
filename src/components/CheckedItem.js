@@ -6,7 +6,9 @@ function CheckedItem({toDoList}) {
     return (
 
         <del>
-            {toDoList.id} / {toDoList.text}
+            <span>
+                {toDoList.id} / {toDoList.todo}
+            </span>
         </del>
     )
 

@@ -4,7 +4,7 @@ function UnCheckedItem({toDoList}) {
 
     return(
         <span>
-            {toDoList.id} / {toDoList.text}
+            {toDoList.id} / {toDoList.todo}
         </span>
     )
 
