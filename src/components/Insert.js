@@ -1,14 +1,12 @@
-import { useCallback, useRef, useState } from 'react';
-
-function Insert() {
 
 
+function Insert({onInsert}) {
 
-
+    
     return (
-        <div>
+        <form onSubmit={onInsert}>
             <input name="text" /><button type='submit'>enter</button>
-        </div>
+        </form>
     )
 }
 
