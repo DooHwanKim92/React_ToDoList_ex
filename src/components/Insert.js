@@ -2,6 +2,8 @@
 
 function Insert({onInsert}) {
 
+
+    
     
     return (
         <form onSubmit={onInsert}>
