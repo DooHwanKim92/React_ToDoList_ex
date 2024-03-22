@@ -1,5 +1,8 @@
 import './App.css';
 import { useCallback, useRef, useState } from 'react';
+import Nav from './components/Nav';
+import Insert from './components/Insert';
+import Items from './components/Items';
 
 function App() {
 
@@ -33,15 +36,16 @@ function App() {
 
   return (
     <div className="App">
-      <nav><h1>React ToDoList</h1></nav>
+      <Nav headerName={"하이"}></Nav>
       <form onSubmit={onInsert}>
-        <input name="text" /><button type='submit'>enter</button>
+        <Insert></Insert>
       </form>
       <ul>
-        {toDoList.map(toDoList => 
+        {
+        toDoList.map(toDoList => 
           <li key={toDoList.id}>
             <input type='checkbox' checked={toDoList.checked} onClick = {() => onChecked(toDoList.id)}/> 
-            {toDoList.id}/{toDoList.text}
+              {toDoList.id}/{toDoList.text}
             <button>modify</button>
             <button onClick={() => onRemove(toDoList.id)}>delete</button>
           </li>)
