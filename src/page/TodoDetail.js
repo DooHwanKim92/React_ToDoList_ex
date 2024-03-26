@@ -1,29 +1,21 @@
 import { useParams } from "react-router-dom";
 import { useEffect } from 'react';
+import Header from "../components/Header";
 
 
 function TodoDetail({toDoList}) {
 
-    
+    // TodoList 처럼 useEffect();, useParams(); 로직 구현
 
-    const {id} = useParams();
-
-    const toDoItem = toDoList.find(toDoList => toDoList.id === id);
-
-    
-    if (!toDoItem) {
-
-        return (
-            <div>
-                Can not Find List.
-            </div>
-        )
-    }
 
     return (
-        <>
-         할 일 : {toDoItem.todo}
-        </>
+
+        <Header>
+            <div>
+                할 일 상세
+            </div>
+        </Header>
+        
     )
 
 }
